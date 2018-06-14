@@ -6,9 +6,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 @MapperScan(value = {"yinao.qualityLife.dao"})
-public class SpringsecurityApplication {
+public class QualityLifeApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(SpringsecurityApplication.class, args);
+		SpringApplication.run(QualityLifeApplication.class, args);
 	}
 }

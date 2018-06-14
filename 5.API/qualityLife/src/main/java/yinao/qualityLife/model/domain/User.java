@@ -7,14 +7,14 @@ public class User implements LoginDetail, TokenDetail {
 
     private String username;
     private String password;
-    private String authorities;
-    private Long lastPasswordChange;
-    private char enable;
+    private String auth;
+    private Long create_time;
+    private char state;
+    
 
-    public User() {
-    }
-
-    public User setUsername(String username) {
+	public User() {}
+	
+	public User setUsername(String username) {
         this.username = username;
         return this;
     }
@@ -24,26 +24,32 @@ public class User implements LoginDetail, TokenDetail {
         return this;
     }
 
-    public String getAuthorities() {
-        return authorities;
-    }
+    public String getAuth() {
+		return auth;
+	}
 
-    public User setAuthorities(String authorities) {
-        this.authorities = authorities;
-        return this;
-    }
+	public void setAuth(String auth) {
+		this.auth = auth;
+	}
 
-    public Long getLastPasswordChange() {
-        return lastPasswordChange;
-    }
+	public Long getCreate_time() {
+		return create_time;
+	}
 
-    public User setLastPasswordChange(Long lastPasswordChange) {
-        this.lastPasswordChange = lastPasswordChange;
-        return this;
-    }
+	public void setCreate_time(Long create_time) {
+		this.create_time = create_time;
+	}
 
-    public User setEnable(char enable) {
-        this.enable = enable;
+//	public char getState() {
+//		return state;
+//	}
+//
+//	public void setState(char state) {
+//		this.state = state;
+//	}
+
+	public User setEnable(char state) {
+        this.state = state;
         return this;
     }
 
@@ -59,20 +65,17 @@ public class User implements LoginDetail, TokenDetail {
 
     @Override
     public boolean enable() {
-        if (this.enable == '1'){
+        if (this.state == '1'){
             return true;
         }
         return false;
     }
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "username='" + username + '\'' +
-                ", password='" + password + '\'' +
-                ", authorities='" + authorities + '\'' +
-                ", lastPasswordChange=" + lastPasswordChange +
-                ", enable=" + enable +
-                '}';
-    }
+	@Override
+	public String toString() {
+		return "User [username=" + username + ", password=" + password + ", auth=" + auth + ", create_time="
+				+ create_time + ", state=" + state + "]";
+	}
+
+   
 }

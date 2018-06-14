@@ -13,13 +13,13 @@ public class SecurityModelFactory {
     public static UserDetailImpl create(User user) {
         Collection<? extends GrantedAuthority> authorities;
         try {
-            authorities = AuthorityUtils.commaSeparatedStringToAuthorityList(user.getAuthorities());
+            authorities = AuthorityUtils.commaSeparatedStringToAuthorityList(user.getAuth());
         } catch (Exception e) {
             authorities = null;
         }
 
         Date lastPasswordReset = new Date();
-        lastPasswordReset.setTime(user.getLastPasswordChange());
+        lastPasswordReset.setTime(user.getCreate_time());
         return new UserDetailImpl(
                 user.getUsername(),
                 user.getUsername(),

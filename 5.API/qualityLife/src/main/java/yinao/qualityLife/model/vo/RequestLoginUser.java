@@ -9,8 +9,22 @@ public class RequestLoginUser {
 
     @NotNull
     private String password;
+    
+    private String name;
+    
+    @NotNull
+    private String usertype;
+    
 
-    public RequestLoginUser() {
+    public String getUsertype() {
+		return usertype;
+	}
+
+	public void setUsertype(String usertype) {
+		this.usertype = usertype;
+	}
+
+	public RequestLoginUser() {
     }
 
     public String getUsername() {
@@ -22,7 +36,15 @@ public class RequestLoginUser {
         return this;
     }
 
-    public String getPassword() {
+    public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getPassword() {
         return password;
     }
 
@@ -36,6 +58,7 @@ public class RequestLoginUser {
         return "RequestLoginUser{" +
                 "username='" + username + '\'' +
                 ", password='" + password + '\'' +
+                ", name='" + name + '\'' +
                 '}';
     }
 }

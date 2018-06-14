@@ -23,12 +23,17 @@ public class LoginServiceImpl implements LoginService {
     }
 
     @Override
-    public LoginDetail getLoginDetail(String username) {
-        return userMapper.getUserFromDatabase(username);
-    }
-
-    @Override
     public String generateToken(TokenDetail tokenDetail) {
         return tokenUtils.generateToken(tokenDetail);
     }
+
+	@Override
+	public LoginDetail getLoginDetail(String username, String usertype) {
+    	if(usertype.equals("EMPLOYER")) {
+    		return userMapper.loginEmployer(username);
+    	}else {
+    		return userMapper.loginHousekeeper(username) ; 
+    	}
+	}
+
 }

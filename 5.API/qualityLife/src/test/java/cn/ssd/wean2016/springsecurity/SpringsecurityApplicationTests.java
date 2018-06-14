@@ -18,7 +18,7 @@ public class SpringsecurityApplicationTests {
 
 	@Test
     public void testGetUser(){
-        User user = userMapper.getUserFromDatabase("1");
+        User user = userMapper.loginEmployer("1");
         System.out.println(user);
     }
 
