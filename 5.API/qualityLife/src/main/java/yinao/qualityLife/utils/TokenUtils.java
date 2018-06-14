@@ -39,7 +39,17 @@ public class TokenUtils {
         claims.put("created", this.generateCurrentDate());
         return this.generateToken(claims);
     }
-
+    
+    /**
+     * 根据 username 生成 Token
+     */
+    public String generateToken(String username) {
+        Map<String, Object> claims = new HashMap<String, Object>();
+        claims.put("sub", username );
+        claims.put("created", this.generateCurrentDate());
+        return this.generateToken(claims);
+    }
+    
     /**
      * 根据 claims 生成 Token
      *

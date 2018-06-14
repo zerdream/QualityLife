@@ -5,8 +5,8 @@ import yinao.qualityLife.model.TokenDetail;
 
 public interface LoginService {
 
-    LoginDetail getLoginDetail(String username);
+    LoginDetail getLoginDetail(String username , String usertype); 
 
     String generateToken(TokenDetail tokenDetail);
-
+    
 }
