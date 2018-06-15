@@ -57,14 +57,15 @@ public class AuthenticationTokenFilter extends UsernamePasswordAuthenticationFil
         // 尝试拿 token 中的 username
         // 若是没有 token 或者拿 username 时出现异常，那么 username 为 null
         String username = this.tokenUtils.getUsernameFromToken(authToken);
-  
+        String usertype = this.tokenUtils.getUserTypeFromToken(authToken);
         
+       
         // 如果上面解析 token 成功并且拿到了 username 并且本次会话的权限还未被写入
         if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
             // 用 UserDetailsService 从数据库中拿到用户的 UserDetails 类
             // UserDetails 类是 Spring Security 用于保存用户权限的实体类
 
-        	UserDetails userDetails = ((UserDetailsServiceImpl) this.userDetailsService).judgeType(username ,httpRequest.getParameter("usertype"));
+        	UserDetails userDetails = ((UserDetailsServiceImpl) this.userDetailsService).judgeType( username , usertype );
         
             // 检查用户带来的 token 是否有效
             // 包括 token 和 userDetails 中用户名是否一样， token 是否过期， token 生成时间是否在最后一次密码修改时间之前

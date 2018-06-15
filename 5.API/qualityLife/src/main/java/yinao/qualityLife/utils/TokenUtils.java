@@ -33,19 +33,37 @@ public class TokenUtils {
      * @param tokenDetail
      * @return
      */
-    public String generateToken(TokenDetail tokenDetail) {
+    public String generateToken(TokenDetail tokenDetail , String usertype) {
         Map<String, Object> claims = new HashMap<String, Object>();
         claims.put("sub", tokenDetail.getUsername());
+        claims.put("usertype", usertype );
         claims.put("created", this.generateCurrentDate());
         return this.generateToken(claims);
     }
     
     /**
+     * 获得我们封装在 token 中的 usertype
+     * @param token
+     * @return
+     */
+    public String getUserTypeFromToken(String token) {
+        String usertype;
+        try {
+            final Claims claims = this.getClaimsFromToken(token);
+            usertype = (String) claims.get("usertype") ;
+        } catch (Exception e) {
+        	usertype = null;
+        }
+        return usertype;
+    }
+    
+    /**
      * 根据 username 生成 Token
      */
-    public String generateToken(String username) {
+    public String generateToken(String username , String usertype) {
         Map<String, Object> claims = new HashMap<String, Object>();
         claims.put("sub", username );
+        claims.put("usertype", usertype );
         claims.put("created", this.generateCurrentDate());
         return this.generateToken(claims);
     }

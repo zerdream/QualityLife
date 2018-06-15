@@ -7,6 +7,6 @@ public interface LoginService {
 
     LoginDetail getLoginDetail(String username , String usertype); 
 
-    String generateToken(TokenDetail tokenDetail);
+    String generateToken(TokenDetail tokenDetail ,  String usertype);
     
 }

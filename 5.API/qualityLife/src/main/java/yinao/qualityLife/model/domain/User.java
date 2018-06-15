@@ -77,5 +77,11 @@ public class User implements LoginDetail, TokenDetail {
 				+ create_time + ", state=" + state + "]";
 	}
 
+	@Override
+	public String getUsertype() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
    
 }

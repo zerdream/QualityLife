@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="yinao.qualityLife.dao.HouseKeeperMapper">
+
+	<resultMap id="getUserFromDatabaseMap" type="yinao.qualityLife.model.domain.HouseKeeper">
+        <id column="username" property="username"/>
+        <result column="name" property="name"/>
+        <result column="headimageurl" property="headimageurl"/>
+        <result column="password" property="password"/>
+        <result column="idcard" property="idcard"/>
+        <result column="education" property="education"/>
+        <result column="address3" property="address3"/>
+        <result column="address2" property="address2"/>
+        <result column="address1" property="address1"/>
+        <result column="sex" property="sex"/> 
+        <result column="create_time" property="create_time"/>
+        <result column="role_id" property="role_id"/>
+        <result column="state" property="state"/> 
+    </resultMap>
+    
+    <select id="houseKeeperList" resultMap="getUserFromDatabaseMap">
+    	SELECT * FROM `t_base_housekeeper` 
+        <where>
+        	state != "0"
+        	<if test="username != null and username != ''">
+        		and username = #{username}
+        	</if>
+        	<if test="name != null and name != ''">
+        		and name = #{name}
+        	</if>
+        	<if test="state != null and state != ''">
+        		and state = #{state}
+        	</if>
+        </where>
+    </select>
+    
+    <update id="updateEmployerInfo" >
+  		update t_base_housekeeper
+	    <set>
+			<if test="name != null and name != ''">name=#{name},</if> 
+			
+			<if test="headimageurl != null and headimageurl != ''">headimageurl=#{headimageurl},</if>
+			<if test="idcard != null and idcard != ''">idcard=#{idcard},</if>
+			<if test="education != null and education != ''">education=#{education},</if>
+			<if test="address1 != null and address1 != ''">address1=#{address1},</if>
+			<if test="address2 != null and address2 != ''">address2=#{address2},</if>
+			<if test="address3 != null and address3 != ''">address3=#{address3},</if>
+			<if test="sex != null and sex != ''">sex=#{sex},</if>
+			update_time=now(),
+			<if test="role_id != null and role_id != ''">role_id=#{role_id},</if>
+			<!-- <if test="state != null and state != ''">state=#{state}</if> -->
+	    </set>
+  		where username=#{username}
+	</update>
+	
+	<update id="deletehousekeeper" >
+  		update t_base_housekeeper
+  		<set>
+	    state="0"
+	    </set>
+  		where username=#{username}
+	</update>
+	
+	<insert id="addhousekeeper"   >
+    	INSERT INTO
+        	`t_base_housekeeper`
+        	(username,name,headimageurl,idcard,education,address1,address2,address3,sex,role_id,state , create_time)
+        	VALUES
+        	(#{username},#{name},#{headimageurl},#{idcard},#{education},#{address1},#{address2},#{address3},#{sex},'1' , '1',  now()  )
+   </insert>
+    
+    
+    
+    
+
+
+    
+           
+
+</mapper>

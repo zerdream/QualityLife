@@ -4,7 +4,6 @@ import yinao.qualityLife.dao.UserMapper;
 import yinao.qualityLife.model.LoginDetail;
 import yinao.qualityLife.model.ResultMap;
 import yinao.qualityLife.model.TokenDetail;
-import yinao.qualityLife.model.domain.User;
 import yinao.qualityLife.model.vo.Data;
 import yinao.qualityLife.model.vo.RequestLoginUser;
 import yinao.qualityLife.service.LoginService;
@@ -49,8 +48,7 @@ public class LoginController {
         if (ifLoginFail != null){
             return ifLoginFail;
         }
-
-        return new ResultMap().success().message("").data(new Data().addObj(tokenHeader, loginService.generateToken((TokenDetail) loginDetail)));
+        return new ResultMap().success().message("").data(new Data().addObj(tokenHeader, loginService.generateToken((TokenDetail) loginDetail, requestLoginUser.getUsertype())));
 
     }
 
@@ -87,15 +85,12 @@ public class LoginController {
         if(requestLoginUser.getUsertype().equals("EMPLOYER")) {
         	//将数据写入数据库 并生成token
             userMapper.registerEmployer(requestLoginUser.getUsername() , requestLoginUser.getPassword() , requestLoginUser.getName()) ; 
-            return new ResultMap().success().message("success").data(new Data().addObj(tokenHeader, tokenUtils.generateToken(requestLoginUser.getUsername() ))); 
+            return new ResultMap().success().message("success").data(new Data().addObj(tokenHeader, tokenUtils.generateToken(requestLoginUser.getUsername() ,requestLoginUser.getUsertype()))); 
     	}else {
     		//将数据写入数据库 并生成token
             userMapper.registerHousekeeper(requestLoginUser.getUsername() , requestLoginUser.getPassword() ,requestLoginUser.getName() ) ; 
-            return new ResultMap().success().message("success").data(new Data().addObj(tokenHeader, tokenUtils.generateToken(requestLoginUser.getUsername() ))); 
+            return new ResultMap().success().message("success").data(new Data().addObj(tokenHeader, tokenUtils.generateToken(requestLoginUser.getUsername() ,requestLoginUser.getUsertype()))); 
     	}
-        
-             
-    
     }
     
     //注册验证
