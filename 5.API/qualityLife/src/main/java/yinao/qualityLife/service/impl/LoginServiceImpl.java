@@ -23,8 +23,8 @@ public class LoginServiceImpl implements LoginService {
     }
 
     @Override
-    public String generateToken(TokenDetail tokenDetail) {
-        return tokenUtils.generateToken(tokenDetail);
+    public String generateToken(TokenDetail tokenDetail , String usertype) {
+        return tokenUtils.generateToken(tokenDetail , usertype);
     }
 
 	@Override

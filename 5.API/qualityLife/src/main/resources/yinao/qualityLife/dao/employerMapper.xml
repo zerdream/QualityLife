@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="yinao.qualityLife.dao.employerMapper">
+
+	<resultMap id="getUserFromDatabaseMap" type="yinao.qualityLife.model.domain.Employer">
+		<id column="emid" property="emid"/>
+		<result column="name" property="name"/>
+		<result column="username" property="username"/>
+		<result column="password" property="password"/>
+		<result column="headimageurl" property="headimageurl"/>
+		<result column="idcard" property="idcard"/>
+		<result column="education" property="education"/>
+		<result column="age" property="age"/>
+		<result column="sex" property="sex"/>  
+		<result column="address1" property="address1"/>
+		<result column="address2" property="address2"/>
+		<result column="address3" property="address3"/>
+		<result column="creat_at" property="creat_at"/>
+		<result column="update_at" property="update_at"/>
+		<result column="create_time" property="create_time"/>
+		<result column="update_time" property="update_time"/>
+		<result column="role_id" property="role_id"/>
+		<result column="servicestate" property="servicestate"/>
+		<result column="state" property="state"/>	
+	</resultMap>
+ 	
+ 	<!-- 雇主信息列表 -->
+    <select id="getEmployerInfo" resultMap="getUserFromDatabaseMap">
+    	SELECT * FROM `t_base_employer` 
+        <where>
+        	state != "0"
+        	<if test="username != null and username != ''">
+        		and username = #{username}
+        	</if>
+        	<if test="name != null and name != ''">
+        		and name = #{name}
+        	</if>
+        	<if test="servicestate != null and servicestate != ''">
+        		and servicestate = #{servicestate}
+        	</if>
+        </where>       
+    </select>
+    
+	<!-- 编辑雇主信息 -->  
+	<update id="updateEmployerInfo" >
+  		update t_base_employer
+	    <set>
+			<if test="name != null and name != ''">name=#{name},</if> 
+			<if test="idcard != null and idcard != ''">idcard=#{idcard},</if>
+			<if test="education != null and education != ''">education=#{education},</if>
+			<if test="address1 != null and address1 != ''">address1=#{address1},</if>
+			<if test="address2 != null and address2 != ''">address2=#{address2},</if>
+			<if test="address3 != null and address3 != ''">address3=#{address3},</if>
+			<if test="headimageurl != null and headimageurl != ''">headimageurl=#{headimageurl},</if>
+			<if test="servicestate != null and servicestate != ''">servicestate=#{servicestate},</if>
+	    </set>
+  		where username=#{username}
+	</update>
+	
+
+    
+</mapper>
